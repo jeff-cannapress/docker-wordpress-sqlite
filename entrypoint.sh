@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # terminate on errors
-set -e
+#set -e
 
 # Check if volume is empty
 if [ ! "$(ls -A "/var/www/wp-content" 2>/dev/null)" ]; then
