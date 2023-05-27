@@ -99,6 +99,7 @@ COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +rx /usr/bin/entrypoint.sh
 RUN chown nobody.nobody /usr/bin/entrypoint.sh
 
-ENTRYPOINT /usr/bin/entrypoint.sh &&  /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf 
+# cant have separate entrypoint and run commands on google cloud platform
+ENTRYPOINT /usr/bin/entrypoint.sh && /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf 
 HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1/wp-login.php
 EXPOSE 80
