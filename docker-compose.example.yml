@@ -7,6 +7,7 @@ services:
     build: .
     volumes:
       - "site-data:/var/www/wp-content"
+      - "site-db-data:/var/www/wp-content/database"
     environment:
       WORDPRESS_SITE_URL: http://wordpress.example.com
       FS_METHOD: direct
@@ -15,6 +16,15 @@ services:
       #WP_DEBUG_DISPLAY: "true"
     ports:
       - "80:80"
-
+  adminer:
+    build: ./adminer
+    environment:
+      - ADMINER_SQLITE_PASSWORD=wordpress
+    volumes:
+      - site-db-data:/var/database
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
 volumes:
   site-data:
+  site-db-data:
